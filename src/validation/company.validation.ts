@@ -1,0 +1,42 @@
+import * as Joi from '@hapi/joi';
+
+const companyCreate: Joi.Schema = Joi.object({
+  name: Joi.string().required().min(3),
+  type: Joi.string().required(),
+  // address: Joi.object({
+  //   latitude: Joi.string().required(),
+  //   longitude: Joi.string().required(),
+  //   name: Joi.string().required(),
+  //   street: Joi.string(),
+  //   city: Joi.string(),
+  //   home: Joi.string(),
+  //   apartment: Joi.string(),
+  //   comment: Joi.string(),
+  //   domofon: Joi.string(),
+  //   postalCode: Joi.string(),
+  //   address: Joi.string().required(),
+  //   regionId: Joi.number().required(),
+  //   districtId: Joi.number().required(),
+  // }).required(),
+  status: Joi.string(),
+  legalName: Joi.string(),
+  logo: Joi.string(),
+  mfo: Joi.string(),
+  holderType: Joi.string(),
+  directorFullName: Joi.string(),
+  bankName: Joi.string(),
+  branchName: Joi.string(),
+  branchCode: Joi.string(),
+  oked: Joi.string(),
+  inn: Joi.string(),
+  phone: Joi.string(),
+  email: Joi.string(),
+  orderType: Joi.string(),
+  legalAddress: Joi.string(),
+  // addressId: Joi.string(),
+  // timeTable: Joi.string(),
+  warehouse: Joi.string(),
+  employee: Joi.string(),
+});
+
+export default companyCreate;
