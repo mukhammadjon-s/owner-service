@@ -1,0 +1,135 @@
+AddressService 
+
+
+{
+    "id": 1,
+    "address": {
+        "latitude": "qasdsadasdasdasdasd",
+        "longitude": "asdasd",
+        "name": "asdasd",
+        "street": "asdasd",
+        "city": "asdasd",
+        "home": "asdasd",
+        "apartment": "asdasd",
+        "comment": "asdasd",
+        "domofon": "asdasd",
+        "regionId": 213,
+        "districtId": 21312,
+        "address": "address",
+        "postalCode": "21312"
+    }
+}
+
+
+CompanyService 
+
+getAll query 
+
+{
+    "query": {
+        "status": "PENDING",
+        "type": "type1"
+    }
+}
+
+
+Addnew Object
+
+{
+    "address": {
+        "latitude": "qasdsadasdasdasdasd",
+        "longitude": "asdasd",
+        "name": "asdasd",
+        "street": "asdasd",
+        "city": "asdasd",
+        "home": "asdasd",
+        "apartment": "asdasd",
+        "comment": "asdasd",
+        "domofon": "asdasd",
+        "regionId": 213,
+        "districtId": 21312,
+        "address": "address",
+        "postalCode": "21312"
+    },
+    "company":{
+        "name":"name",
+        "legalName":"legalName",
+        "logo":"logo",
+        "mfo":"mfo",
+        "holderType":"LTD",
+        "directorFullName":"directorFullName",
+        "bankName":"bankName",
+        "branchName":"branchName",
+        "branchCode":"branchCode",
+        "oked":"oked",
+        "inn":"inn",
+        "phone":"phone",
+        "email":"email",
+        "orderType":"END_PRODUCT",
+        "legalAddress":"legalAddress",
+        "address":"address",
+        "type":"type",
+        "status":"PENDING"
+    }
+}
+
+
+EmployeService 
+
+addNew 
+
+{
+    "employee": {
+        "name": "name",
+        "companyId": 1,
+        "status": "ACTIVE",
+        "position": "position",
+        "level": 12,
+        "userId": "userId"
+    }
+}
+
+{
+    "query": {
+        "companyId":1
+    },
+    "id":5,
+    "status":"ACTIVE",
+    "employee": {
+        "name": "nam1easdsada"
+    }
+}
+
+
+WarehouseService 
+
+addNew 
+
+{
+    "warehouse": {
+        "name": "12",
+        "status": "ACTIVE",
+        "addressId": 1,
+        "companyId": 1
+    }
+}
+
+getAll 
+
+{
+    "query": {
+        "status": "ACTIVE",
+        "companyId": 2
+    }
+}
+
+update 
+{
+    "id": 1,
+    "warehouse": {
+        "addressId": 1,
+        "companyId": 1,
+        "name": "nisi",
+        "status": "INACTIVE"
+    }
+}

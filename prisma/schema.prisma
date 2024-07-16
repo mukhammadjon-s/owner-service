@@ -1,0 +1,180 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Company {
+  id               Int            @id @default(autoincrement())
+  slug             String         @unique
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+  deletedAt        DateTime?
+  isDeleted        Boolean        @default(false)
+  name             String?
+  legalName        String
+  logo             String?
+  mfo              String?
+  holderType       HolderType     @default(LLC)
+  directorFullName String?
+  bankName         String?
+  branchName       String?
+  branchCode       String?
+  oked             String?
+  inn              String
+  phone            String
+  tgPhone          String?
+  address          String?
+  email            String?
+  orderType        OrderType      @default(END_PRODUCT)
+  legalAddress     String?
+  Address          Address?       @relation(fields: [addressId], references: [id])
+  addressId        Int?           @unique
+  type             String?
+  status           ComnpanyStatus @default(PENDING)
+  timeTable        TimeTable?
+  warehouse        Warehouse[]
+  employee         Employee[]
+  bankAccountId    String?
+
+  @@map(name: "company")
+}
+
+model Address {
+  id         Int         @id @default(autoincrement())
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+  deletedAt  DateTime?
+  isDeleted  Boolean     @default(false)
+  latitude   String
+  longitude  String
+  name       String
+  street     String
+  city       String
+  home       String
+  apartment  String
+  comment    String      @db.Text
+  domofon    String
+  address    String
+  regionId   Int?
+  districtId Int?
+  postalCode String?
+  //    company Company?
+  //  company Company @relation(fields: [companyId],references: [id])
+  //  companyId Int
+  company    Company?
+  // Warehouse  Warehouse[]
+
+  @@map(name: "address")
+}
+
+model TimeTable {
+  id        Int             @id @default(autoincrement())
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+  deletedAt DateTime?
+  isDeleted Boolean         @default(false)
+  startTime DateTime?
+  endTime   DateTime?
+  day       Int?
+  status    TimeTableStatus @default(ACTIVE)
+  company   Company         @relation(fields: [companyId], references: [id])
+  companyId Int             @unique
+
+  @@map(name: "timeTable")
+}
+
+model CompanyTranslations {
+  id          Int       @id @default(autoincrement())
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  deletedAt   DateTime?
+  isDeleted   Boolean   @default(false)
+  itemId      Int
+  lang        LangEnum  @default(UZ)
+  description String    @db.Text
+
+  @@map(name: "companyTranslations")
+}
+
+model Warehouse {
+  id        Int             @id @default(autoincrement())
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+  deletedAt DateTime?
+  isDeleted Boolean         @default(false)
+  name      String
+  status    WarehouseStatus @default(ACTIVE)
+  // address   Address         @relation(fields: [addressId], references: [id])
+  addressId Int?
+  address   String
+  company   Company         @relation(fields: [companyId], references: [id])
+  companyId Int
+  districtId String?
+  regionId   String?
+
+  @@map(name: "warehouse")
+}
+
+model Employee {
+  id        Int            @id @default(autoincrement())
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+  deletedAt DateTime?
+  isDeleted Boolean        @default(false)
+  status    EmployeeStatus @default(ACTIVE)
+  position  String
+  level     Int
+  userId    String
+  name      String
+  company   Company        @relation(fields: [companyId], references: [id])
+  companyId Int
+
+  @@map(name: "employee")
+}
+
+enum ComnpanyStatus {
+  ACTIVE
+  BLOCKED
+  PENDING
+  PAUSED
+}
+
+enum TimeTableStatus {
+  ACTIVE
+  INACTIVE
+}
+
+enum WarehouseStatus {
+  ACTIVE
+  INACTIVE
+}
+
+enum EmployeeStatus {
+  ACTIVE
+  BLOCKED
+}
+
+enum HolderType {
+  LLC
+  IE
+  SEE
+}
+
+enum OrderType {
+  ALL
+  PREORDER
+  END_PRODUCT
+}
+
+enum LangEnum {
+  UZ
+  RU
+  En
+}

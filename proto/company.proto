@@ -1,0 +1,395 @@
+syntax = "proto3";
+
+package company;
+
+service AddressService {
+  rpc GetAll (AddressGetAllRequest) returns (AddressGetAllReturn){}
+  rpc GetOne (AddressGetOneRequest) returns (AddressGetOneReturn){}
+  rpc AddNew (AddressAddNewRequest) returns (AddressAddNewResponse){}
+  rpc Update (AddressUpdateRequest) returns (AddressUpdateResponse){}
+  rpc Delete (DelReq) returns (DelRes){}
+}
+
+message DelReq {
+  int32 id = 1;
+}
+
+message DelRes {
+  string result = 1;
+}
+
+message AddressGetAllRequest {
+  optional Query query = 1;
+}
+
+message AddressGetAllReturn {
+  repeated Address data = 1;
+  optional int32 total = 2;
+}
+
+message AddressGetOneRequest {
+  int32 id = 1;
+}
+
+message AddressGetOneReturn {
+  optional Address address = 1;
+}
+
+message AddressAddNewRequest {
+  optional Address address = 1;
+}
+
+message AddressAddNewResponse {
+  optional Address address = 1;
+}
+
+message AddressUpdateRequest {
+  optional int32 id = 1;
+  optional Address address = 2;
+}
+
+message AddressUpdateResponse {
+  optional Address address = 1;
+}
+//////
+
+service TimeTableService {
+  rpc GetAll (TimeTableGetAllRequest) returns (TimeTableGetAllReturn){}
+  rpc GetOne (TimeTableGetOneRequest) returns (TimeTableGetOneReturn){}
+  rpc AddNew (TimeTableAddNewRequest) returns (TimeTableAddNewResponse){}
+  rpc Update (TimeTableUpdateRequest) returns (TimeTableUpdateResponse){}
+  rpc Delete (DelReq) returns (DelRes){}
+}
+
+message TimeTableGetAllRequest {
+  optional TimeTableQuery query = 1;
+}
+
+message TimeTableGetAllReturn {
+  repeated TimeTable timeTable = 1;
+}
+
+message TimeTableGetOneRequest {
+  int32 id = 1;
+}
+
+message TimeTableUpdateRequest {
+  int32 id = 1;
+  optional TimeTable timeTable = 2;
+}
+
+message TimeTableGetOneReturn {
+  optional TimeTable timeTable = 1;
+}
+
+message TimeTableUpdateResponse {
+  optional TimeTable timeTable = 1;
+}
+
+message TimeTableAddNewRequest {
+  optional TimeTable timeTable = 1;
+}
+
+message TimeTableAddNewResponse {
+  optional TimeTable timeTable = 1;
+}
+
+/////
+
+service CompanyService {
+  rpc GetAll (CompanyGetAllRequest) returns (CompanyGetAllReturn){}
+  rpc GetOne (CompanyGetOneRequest) returns (CompanyGetOneReturn){}
+  rpc AddNew (CompanyAddNewRequest) returns (CompanyAddNewResponse){}
+  rpc Update (CompanyUpdateRequest) returns (CompanyUpdateResponse){}
+  rpc Delete (DelReq) returns (DelRes){}
+  rpc GetCompaniesByIds (GetCompaniesByIdsRequest) returns (GetCompaniesByIdsResponse){}
+  rpc RegisterCompanyPaymentData (RegisterCompanyPaymentDataReq) returns (RegisterCompanyPaymentDataRes){}
+  rpc GetOneByName (GetOneByNameReq) returns (GetOneByNameRes) {}
+  rpc GetCompanyInfo (GetCompanyInfoReq) returns (GetCompanyInfoRes) {}
+}
+
+message GetCompanyInfoReq {
+  int32 companyId = 1;
+}
+
+message GetCompanyInfoRes {
+  string legalName = 1;
+}
+
+message GetOneByNameReq {
+  string legalName = 1;
+}
+
+message GetOneByNameRes {
+  CompanyByName result = 1;
+}
+
+message CompanyByName {
+ int32 id = 1;
+}
+
+message RegisterCompanyPaymentDataReq {
+  string account = 1;
+  string mfo = 2;
+  string name = 3;
+  string inn = 4;
+  optional string cashId = 5;
+}
+
+message RegisterCompanyPaymentDataRes {
+  string id = 1;
+}
+
+message GetCompaniesByIdsRequest {
+  repeated int32 companyIds = 1;
+}
+
+message GetCompaniesByIdsResponse {
+  repeated GetCompaniesByIdsItem companies = 1;
+}
+
+message GetCompaniesByIdsItem {
+  string id = 1;
+  string name = 2;
+  string legalName = 3;
+  string slug = 4;
+}
+
+message CompanyGetOneRequest {
+  int32 id = 1;
+}
+
+message CompanyUpdateRequest {
+  int32 id = 1;
+  optional Company company = 2;
+}
+
+message CompanyGetOneReturn {
+  optional Company company = 1;
+}
+
+message CompanyUpdateResponse {
+  optional Company company = 1;
+}
+
+message CompanyAddNewRequest {
+  Company company = 1;
+  optional Address address = 2;
+}
+
+message CompanyAddNewResponse {
+  optional Company data = 1;
+  // optional Address address = 2;
+}
+
+message CompanyGetAllRequest {
+  optional Query query = 1;
+}
+
+message CompanyGetAllReturn {
+  repeated Company data = 1;
+  optional int32 total = 2;
+}
+
+service WarehouseService {
+  rpc GetAll (WareHouseGetAllReq) returns (WareHouseGetAllRes){}
+  rpc AddNew (WareHouseAddNewReq) returns (WareHouseAddNewRes){}
+  rpc GetOne (WareHouseGetOneReq) returns (WareHouseGetOneRes){}
+  rpc Update (WareHouseUpdateReq) returns (WareHouseUpdateRes){}
+  rpc UpdateStatusOnly (WareHouseUpdateStatusReq) returns (WareHouseUpdateStatusRes){}
+  rpc Inactive (WareHouseInactiveReq) returns (WareHouseInactiveRes){}
+  rpc Delete (DelReq) returns (DelRes){}
+  rpc GetOneByName (GetOneWarehouseByNameReq) returns (GetOneWarehouseByNameRes){}
+  rpc GetWarehouseByCompanyId (GetWarehouseByCompanyIdReq) returns (GetWarehouseByCompanyIdRes){}
+}
+
+message GetWarehouseByCompanyIdReq {
+  int32 companyId = 1;
+}
+
+message GetWarehouseByCompanyIdRes {
+  WarehouseByName warehouse = 1;
+}
+
+message GetOneWarehouseByNameReq {
+  string name = 1;
+}
+
+message GetOneWarehouseByNameRes {
+  WarehouseByName result = 1;
+}
+
+message WarehouseByName {
+   int32 id = 1;
+}
+
+message WareHouseGetAllReq {
+  optional QueryWarehouse query = 1;
+}
+
+message WareHouseGetAllRes {
+  repeated Warehouse data = 1;
+  optional int32 total = 2;
+}
+
+message WareHouseAddNewReq {
+  optional Warehouse warehouse = 1;
+}
+
+message WareHouseAddNewRes {
+  optional Warehouse data = 1;
+  repeated string errors = 9;
+}
+
+message WareHouseGetOneReq {
+  int32 id = 1;
+}
+
+message WareHouseGetOneRes {
+  optional Warehouse data = 1;
+  repeated string errors = 9;
+}
+
+message WareHouseUpdateReq {
+  int32 id = 1;
+  Warehouse warehouse = 2;
+}
+
+message WareHouseUpdateRes {
+  optional Warehouse data = 1;
+  repeated string errors = 9;
+}
+
+message WareHouseUpdateStatusReq {
+  int32 id = 1;
+  string status = 2;
+}
+
+message WareHouseUpdateStatusRes {
+  optional Warehouse data = 1;
+  repeated string errors = 9;
+}
+
+message WareHouseInactiveReq {
+  repeated int32 warehouse = 1;
+}
+
+message WareHouseInactiveRes {
+  string result = 1;
+}
+
+message TimeTable {
+  optional int32 id = 1;
+  optional string createdAt = 2;
+  optional string updatedAt = 3;
+  optional string startTime = 4;
+  optional string endTime = 5;
+  optional int32 day = 6;
+  optional string status =7;
+}
+
+message Employee {
+  optional int32 id = 1;
+  optional string createdAt = 2;
+  optional string updatedAt = 3;
+  optional string status = 4;
+  optional string position = 5;
+  optional int32 level = 6;
+  optional string userId = 7;
+  optional string name = 8;
+  optional int32 companyId = 9;
+}
+
+message Warehouse {
+  optional int32 id = 1;
+  optional string createdAt = 2;
+  optional string updatedAt = 3;
+  optional string name = 4;
+  optional string status = 5;
+  optional int32 addressId = 6;
+  optional int32 companyId = 7;
+  optional string address = 8;
+  optional string districtId = 9;
+  optional string regionId = 10;
+}
+
+message Address {
+  optional int32 id = 1;
+  optional string createdAt = 2;
+  optional string updatedAt = 3;
+  optional string latitude = 4;
+  optional string longitude = 5;
+  optional string name = 6;
+  optional string street = 7;
+  optional string city = 8;
+  optional string home = 9;
+  optional string apartment = 10;
+  optional string comment = 11;
+  optional string domofon = 12;
+  optional string address = 13;
+  optional int32 regionId = 14;
+  optional int32 districtId = 15;
+  optional string postalCode = 16;
+}
+
+message Company {
+  optional int32 id = 1;
+  optional string createdAt = 2;
+  optional string updatedAt = 3;
+  optional string deletedAt = 4;
+  optional string name = 5;
+  optional string legalName = 6;
+  optional string logo = 7;
+  optional string mfo = 8;
+  optional string holderType = 9;
+  optional string directorFullName = 10;
+  optional string bankName = 11;
+  optional string branchName = 12;
+  optional string branchCode = 13;
+  optional string oked = 14;
+  optional string inn = 15;
+  optional string phone = 16;
+  optional string email = 17;
+  optional string orderType = 18;
+  optional string legalAddress = 19;
+  optional string addressId = 21;
+  optional string type = 22;
+  optional string status = 23;
+  optional string timeTable = 24;
+  optional string address = 25;
+  string tgPhone = 26;
+  optional string slug = 27;
+  optional string bankAccountId = 28;
+}
+
+message CompanyInterface {
+  optional Company company = 1;
+  optional Address address = 2;
+}
+
+message Query {
+  optional string status = 1;
+  optional string type = 2;
+  optional int32 page = 3;
+  optional int32 pagesize = 4;
+  optional int32 companyId = 5;
+  optional string name = 6;
+}
+
+message TimeTableQuery {
+  optional int32 companyId = 1;
+}
+
+message QueryEmployee {
+  optional string status = 1;
+  optional int32 companyId = 2;
+  optional int32 page = 3;
+  optional int32 pagesize = 4;
+}
+
+message QueryWarehouse {
+  optional string status = 1;
+  optional int32 companyId = 2;
+  optional int32 page = 3;
+  optional int32 pagesize = 4;
+}
